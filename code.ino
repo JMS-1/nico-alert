@@ -20,21 +20,41 @@ void handleRoot()
   server.send(200, "text/html", getHomePage());
 }
 
+auto idle = false;
+
 auto frame = 0;
 auto nextFrame = millis();
+auto endFrame = millis() + 20000;
+
+auto centerColor = RED_INDEX;
+auto ringColor = GREEN_INDEX;
 
 void animate()
 {
+  if (idle)
+  {
+    return;
+  }
+
   auto now = millis();
+
+  if (now >= endFrame)
+  {
+    setColor(pixels, pixels.Color(0, 0, 0));
+
+    idle = true;
+
+    return;
+  }
 
   if (now < nextFrame)
   {
     return;
   }
 
-  nextFrame = now + 1000;
+  nextFrame = now + 100;
 
-  showFrame(pixels, frame, RED_INDEX, GREEN_INDEX);
+  showFrame(pixels, frame, centerColor, ringColor);
 }
 
 void setup(void)
