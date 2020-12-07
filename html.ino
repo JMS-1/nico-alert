@@ -49,11 +49,11 @@ const char *homePage = "\n\
         }\n\
 \n\
         function on() {\n\
-            return request('on')\n\
+            return request('RG')\n\
         }\n\
 \n\
         function off() {\n\
-            return request('off')\n\
+            return request('OFF')\n\
         }\n\
     </script>\n\
 </head>\n\
@@ -62,7 +62,7 @@ const char *homePage = "\n\
     <h1>Der Nico Alarm</h1>\n\
     <div class='options'>\n\
         <button onclick='on()'>Anschalten</button>\n\
-        <button onclick='off()'>Auschalten</button>\n\
+        <button onclick='off()'>Ausschalten</button>\n\
     </div>\n\
 </body>\n\
 \n\
@@ -71,5 +71,5 @@ const char *homePage = "\n\
 
 const char *getHomePage(void)
 {
-  return homePage;
+    return homePage;
 }

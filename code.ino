@@ -15,19 +15,24 @@ ESP8266WebServer server(80);
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(7, D2, NEO_GRB + NEO_KHZ800);
 
-void handleRoot()
-{
-  server.send(200, "text/html", getHomePage());
-}
-
-auto idle = false;
+auto idle = true;
 
 auto frame = 0;
 auto nextFrame = millis();
 auto endFrame = millis() + 20000;
 
-auto centerColor = RED_INDEX;
-auto ringColor = GREEN_INDEX;
+void start(int center, int ring)
+{
+  setColors(center, ring);
+
+  frame = 0;
+  nextFrame = millis();
+  endFrame = millis() + 60000;
+
+  idle = false;
+
+  server.send(200, "text/plain", "OK");
+}
 
 void animate()
 {
@@ -54,7 +59,7 @@ void animate()
 
   nextFrame = now + 100;
 
-  showFrame(pixels, frame, centerColor, ringColor);
+  showFrame(pixels, frame);
 }
 
 void setup(void)
@@ -81,6 +86,22 @@ void setup(void)
   Serial.println(WiFi.localIP());
 
   MDNS.begin("esp8266");
+
+  server.on("/RR", [] { start(RED_INDEX, RED_INDEX); });
+  server.on("/RG", [] { start(RED_INDEX, GREEN_INDEX); });
+  server.on("/RY", [] { start(RED_INDEX, YELLOW_INDEX); });
+
+  server.on("/GR", [] { start(GREEN_INDEX, RED_INDEX); });
+  server.on("/GG", [] { start(GREEN_INDEX, GREEN_INDEX); });
+  server.on("/GY", [] { start(GREEN_INDEX, YELLOW_INDEX); });
+
+  server.on("/YR", [] { start(YELLOW_INDEX, RED_INDEX); });
+  server.on("/YG", [] { start(YELLOW_INDEX, GREEN_INDEX); });
+  server.on("/YY", [] { start(YELLOW_INDEX, YELLOW_INDEX); });
+
+  server.on("/OFF", [] { endFrame = millis() - 1; server.send(200, "text/plain", "OK"); });
+
+  server.onNotFound([] { server.send(200, "text/html", getHomePage()); });
 
   server.begin();
 

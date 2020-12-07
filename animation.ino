@@ -4,6 +4,9 @@
 #define GREEN_INDEX 1
 #define YELLOW_INDEX 2
 
+auto centerColor = RED_INDEX;
+auto ringColor = GREEN_INDEX;
+
 const uint32_t reds[] = {
     Adafruit_NeoPixel::Color(32, 0, 0),
     Adafruit_NeoPixel::Color(12, 0, 0),
@@ -24,6 +27,12 @@ const uint32_t yellows[] = {
     Adafruit_NeoPixel::Color(5, 5, 0),
     Adafruit_NeoPixel::Color(1, 1, 0),
 };
+
+void setColors(int center, int ring)
+{
+    centerColor = center;
+    ringColor = ring;
+}
 
 void setColor(Adafruit_NeoPixel &pixels, uint32_t color)
 {
@@ -65,10 +74,10 @@ uint32_t getColor(const uint32_t *colors, int index)
     }
 }
 
-void showFrame(Adafruit_NeoPixel &pixels, int &frame, int center, int ring)
+void showFrame(Adafruit_NeoPixel &pixels, int &frame)
 {
-    const auto centerColors = getColors(center);
-    const auto ringColors = getColors(ring);
+    const auto centerColors = getColors(centerColor);
+    const auto ringColors = getColors(ringColor);
 
     pixels.setPixelColor(0, getColor(centerColors, frame));
 
