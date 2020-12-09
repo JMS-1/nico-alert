@@ -18,8 +18,8 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(7, D2, NEO_GRB + NEO_KHZ800);
 auto idle = true;
 
 auto frame = 0;
-auto nextFrame = millis();
-auto endFrame = millis() + 20000;
+auto nextFrame = 0;
+auto endFrame = 0;
 
 void start(int center, int ring)
 {
@@ -27,7 +27,7 @@ void start(int center, int ring)
 
   frame = 0;
   nextFrame = millis();
-  endFrame = millis() + 60000;
+  endFrame = millis() + 20000;
 
   idle = false;
 

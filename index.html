@@ -12,7 +12,9 @@
 
         body {
             margin: 0;
-            background: #ffffff;
+            background: #eeeeee;
+            width: fit-content;
+            width: -moz-fit-content;
         }
 
         h1 {
@@ -22,19 +24,42 @@
 
         .options {
             overflow: auto;
-            display: flex;
             row-gap: 1em;
-            column-gap: 1em;
-            flex-wrap: wrap;
             padding: 1em;
         }
 
         button {
             font-size: 2em;
-            border-radius: 4px;
+            border-radius: 8px;
             padding: 0.5em;
-            background: #6060ff;
-            color: #ffffff;
+            background: #cccccc;
+            border-width: 3px;
+            margin: 0.5em;
+            outline: unset !important;
+        }
+
+        button.center-red {
+            color: #ff0000;
+        }
+
+        button.center-green {
+            color: #00a000;
+        }
+
+        button.center-yellow {
+            color: #ffff00;
+        }
+
+        button.ring-red {
+            border-color: #ff0000;
+        }
+
+        button.ring-green {
+            border-color: #00a000;
+        }
+
+        button.ring-yellow {
+            border-color: #ffff00;
         }
     </style>
 
@@ -47,12 +72,45 @@
             xhr.send()
         }
 
-        function on() {
-            return request('on')
+        function off() {
+            return request('OFF')
         }
 
-        function off() {
-            return request('off')
+        function rr() {
+            return request('RR')
+        }
+
+        function rg() {
+            return request('RG')
+        }
+
+        function ry() {
+            return request('RY')
+        }
+
+        function gr() {
+            return request('GR')
+        }
+
+        function gg() {
+            return request('GG')
+        }
+
+        function gy() {
+            return request('GY')
+        }
+
+
+        function yr() {
+            return request('YR')
+        }
+
+        function yg() {
+            return request('YG')
+        }
+
+        function yy() {
+            return request('YY')
         }
     </script>
 </head>
@@ -60,8 +118,21 @@
 <body>
     <h1>Der Nico Alarm</h1>
     <div class='options'>
-        <button onclick='on()'>Anschalten</button>
-        <button onclick='off()'>Auschalten</button>
+        <div>
+            <button onclick='off()'>Ausschalten</button>
+        </div>
+        <div>
+            <button onclick='rr()' class='center-red ring-red'>Leiser bitte</button>
+            <button onclick='gr()' class='center-green ring-red'>Essen ist fertig</button>
+        </div>
+        <div>
+            <button onclick='rg()' class='center-red ring-green'>Bitte melden</button>
+            <button onclick='yg()' class='center-yellow ring-green'>Besuch ist da</button>
+        </div>
+        <div>
+            <button onclick='ry()' class='center-red ring-yellow'>Gleich wird es laut</button>
+            <button onclick='gy()' class='center-green ring-yellow'>Anruf erwartet</button>
+        </div>
     </div>
 </body>
 

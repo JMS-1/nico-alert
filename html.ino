@@ -13,7 +13,9 @@ const char *homePage = "\n\
 \n\
         body {\n\
             margin: 0;\n\
-            background: #ffffff;\n\
+            background: #eeeeee;\n\
+            width: fit-content;\n\
+            width: -moz-fit-content;\n\
         }\n\
 \n\
         h1 {\n\
@@ -23,19 +25,42 @@ const char *homePage = "\n\
 \n\
         .options {\n\
             overflow: auto;\n\
-            display: flex;\n\
             row-gap: 1em;\n\
-            column-gap: 1em;\n\
-            flex-wrap: wrap;\n\
             padding: 1em;\n\
         }\n\
 \n\
         button {\n\
             font-size: 2em;\n\
-            border-radius: 4px;\n\
+            border-radius: 8px;\n\
             padding: 0.5em;\n\
-            background: #6060ff;\n\
-            color: #ffffff;\n\
+            background: #cccccc;\n\
+            border-width: 3px;\n\
+            margin: 0.5em;\n\
+            outline: unset !important;\n\
+        }\n\
+\n\
+        button.center-red {\n\
+            color: #ff0000;\n\
+        }\n\
+\n\
+        button.center-green {\n\
+            color: #00a000;\n\
+        }\n\
+\n\
+        button.center-yellow {\n\
+            color: #ffff00;\n\
+        }\n\
+\n\
+        button.ring-red {\n\
+            border-color: #ff0000;\n\
+        }\n\
+\n\
+        button.ring-green {\n\
+            border-color: #00a000;\n\
+        }\n\
+\n\
+        button.ring-yellow {\n\
+            border-color: #ffff00;\n\
         }\n\
     </style>\n\
 \n\
@@ -48,12 +73,45 @@ const char *homePage = "\n\
             xhr.send()\n\
         }\n\
 \n\
-        function on() {\n\
+        function off() {\n\
+            return request('OFF')\n\
+        }\n\
+\n\
+        function rr() {\n\
+            return request('RR')\n\
+        }\n\
+\n\
+        function rg() {\n\
             return request('RG')\n\
         }\n\
 \n\
-        function off() {\n\
-            return request('OFF')\n\
+        function ry() {\n\
+            return request('RY')\n\
+        }\n\
+\n\
+        function gr() {\n\
+            return request('GR')\n\
+        }\n\
+\n\
+        function gg() {\n\
+            return request('GG')\n\
+        }\n\
+\n\
+        function gy() {\n\
+            return request('GY')\n\
+        }\n\
+\n\
+\n\
+        function yr() {\n\
+            return request('YR')\n\
+        }\n\
+\n\
+        function yg() {\n\
+            return request('YG')\n\
+        }\n\
+\n\
+        function yy() {\n\
+            return request('YY')\n\
         }\n\
     </script>\n\
 </head>\n\
@@ -61,8 +119,21 @@ const char *homePage = "\n\
 <body>\n\
     <h1>Der Nico Alarm</h1>\n\
     <div class='options'>\n\
-        <button onclick='on()'>Anschalten</button>\n\
-        <button onclick='off()'>Ausschalten</button>\n\
+        <div>\n\
+            <button onclick='off()'>Ausschalten</button>\n\
+        </div>\n\
+        <div>\n\
+            <button onclick='rr()' class='center-red ring-red'>Leiser bitte</button>\n\
+            <button onclick='gr()' class='center-green ring-red'>Essen ist fertig</button>\n\
+        </div>\n\
+        <div>\n\
+            <button onclick='rg()' class='center-red ring-green'>Bitte melden</button>\n\
+            <button onclick='yg()' class='center-yellow ring-green'>Besuch ist da</button>\n\
+        </div>\n\
+        <div>\n\
+            <button onclick='ry()' class='center-red ring-yellow'>Gleich wird es laut</button>\n\
+            <button onclick='gy()' class='center-green ring-yellow'>Anruf erwartet</button>\n\
+        </div>\n\
     </div>\n\
 </body>\n\
 \n\
