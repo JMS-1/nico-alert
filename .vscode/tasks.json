@@ -1,0 +1,28 @@
+{
+    "tasks": [
+        {
+            "label": "build webapp",
+            "problemMatcher": [
+                "$tsc",
+            ],
+            "script": "build",
+            "type": "npm",
+            "options": {
+                "cwd": "webapp"
+            }
+        },
+        {
+            "isBackground": true,
+            "label": "watch webapp",
+            "problemMatcher": [
+                "$tsc",
+            ],
+            "script": "watch",
+            "type": "npm",
+            "options": {
+                "cwd": "webapp"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}

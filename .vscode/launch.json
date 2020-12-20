@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "linux": {
+                "runtimeExecutable": "/snap/bin/chromium"
+            },
+            "name": "Debug Web App",
+            "port": 28970,
+            "request": "launch",
+            "runtimeArgs": [
+                "--remote-debugging-port=28970",
+                "--new-window"
+            ],
+            "sourceMapPathOverrides": {
+                "webpack://nico-alarm-app/./*": "${workspaceFolder}/webapp/*"
+            },
+            "sourceMaps": true,
+            "type": "chrome",
+            "url": "http://localhost:5500",
+            "webRoot": "${workspaceFolder}"
+        }
+    ],
+    "version": "0.2.0"
+}
