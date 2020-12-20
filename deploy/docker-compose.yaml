@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  nico:
+    image: nginx
+    restart: always
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./passwd:/etc/nginx/basic_auth
+      - ./host.crt:/etc/ssl/certs/nginx/host.crt
+      - ./host.key:/etc/ssl/certs/nginx/host.key
+      - ./dist:/usr/webapp
+    network_mode: host       

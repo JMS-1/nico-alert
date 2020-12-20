@@ -1,3 +1,4 @@
-/deploy
+/deploy/host.*
+/deploy/passwd
 
 /private.h
