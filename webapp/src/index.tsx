@@ -3,7 +3,9 @@ import { render } from 'react-dom'
 
 import './index.scss'
 
-render(<div>HELLO</div>, document.querySelector('client-root'))
+import { Root } from './root'
+
+render(<Root />, document.querySelector('client-root'))
 
 /** Allow to reload CSS with Ctrl+F12 - originally only for developers but actually does not harm anything. */
 const css: HTMLLinkElement = document.querySelector('head > link[rel="stylesheet"][href="index.css"]')

@@ -1,0 +1,70 @@
+/* stylelint-disable value-no-vendor-prefix */
+
+.root {
+    display: grid;
+    grid-template-rows: repeat(4, auto);
+    row-gap: 1em;
+    width: 100%;
+    height: 100%;
+    height: fit-content;
+    height: -moz-fit-content;
+    padding: 1em;
+
+    &.busy {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+.command {
+    $textShadow: 1px 1px #808080, 1px -1px #808080, -1px 1px #808080, -1px -1px #808080;
+
+    font-size: 3em;
+    font-weight: bold;
+    color: #ffffff;
+
+    background: #000000;
+    border-width: 0;
+    border-radius: 12px;
+    outline: none;
+
+    + .command {
+        margin-left: 0.2em;
+    }
+
+    &.redBorder {
+        background: #ff0000;
+
+        &.redCenter {
+            text-shadow: $textShadow;
+        }
+    }
+
+    &.yellowBorder {
+        background: #ffff00;
+
+        &.yellowCenter {
+            text-shadow: $textShadow;
+        }
+    }
+
+    &.greenBorder {
+        background: #00ff00;
+
+        &.greenCenter {
+            text-shadow: $textShadow;
+        }
+    }
+
+    &.redCenter {
+        color: #ff0000;
+    }
+
+    &.yellowCenter {
+        color: #ffff00;
+    }
+
+    &.greenCenter {
+        color: #00ff00;
+    }
+}

@@ -9,4 +9,8 @@ services:
       - ./host.crt:/etc/ssl/certs/nginx/host.crt
       - ./host.key:/etc/ssl/certs/nginx/host.key
       - ./dist:/usr/webapp
+      - nico_alert:/usr/config
     network_mode: host       
+volumes:
+  nico_alert:
+    external: true
