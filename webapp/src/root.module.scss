@@ -47,7 +47,7 @@
 }
 
 .command {
-    $textShadow: 1px 1px #808080, 1px -1px #808080, -1px 1px #808080, -1px -1px #808080;
+    $textShadow: 2px 2px #000000, 2px -2px #000000, -2px 2px #000000, -2px -2px #000000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,39 +61,27 @@
     outline: none;
 
     &.RR,
+    &.GG,
+    &.YY {
+        text-shadow: $textShadow;
+    }
+
+    &.RR,
     &.RG,
     &.RY {
         background: #ff0000;
-
-        &.RR,
-        &.GR,
-        &.YR {
-            text-shadow: $textShadow;
-        }
     }
 
     &.YR,
     &.YG,
     &.YY {
         background: #ffff00;
-
-        &.RY,
-        &.GY,
-        &.GY {
-            text-shadow: $textShadow;
-        }
     }
 
     &.GR,
     &.GG,
     &.GY {
         background: #00ff00;
-
-        &.RG,
-        &.GG,
-        &.YG {
-            text-shadow: $textShadow;
-        }
     }
 
     &.RR,
