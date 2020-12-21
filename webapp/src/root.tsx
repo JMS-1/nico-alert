@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import * as React from 'react'
 
-import { defaultConfiguration, httpGet, IConfiguration, loadConfig, TConfig } from './config'
+import { defaultConfiguration, httpGet, httpPut, IConfiguration, loadConfig, TConfig } from './config'
 import styles from './root.module.scss'
 
 interface IRootProps {}
@@ -9,36 +9,37 @@ interface IRootProps {}
 interface IRootState {
     busy: boolean
     config: IConfiguration
+    edit: boolean
 }
 
 interface ICommandProps {
     config: IConfiguration
+    edit: boolean
     setBusy(busy: boolean): void
     what: TConfig
 }
 
 class Command extends React.PureComponent<ICommandProps> {
     render(): JSX.Element | null {
-        const { config, what } = this.props
+        const { config, what, edit } = this.props
 
-        const title = config[what] || what
+        const title = config[what]
+
+        if (!title && !edit) {
+            return null
+        }
 
         return (
-            <button
-                className={classNames(
-                    styles.command,
-                    (what === 'GR' || what === 'GG' || what === 'GY') && styles.greenBorder,
-                    (what === 'RG' || what === 'GG' || what === 'YG') && styles.greenCenter,
-                    (what === 'RR' || what === 'GR' || what === 'YR') && styles.redCenter,
-                    (what === 'RR' || what === 'RG' || what === 'RY') && styles.redBorder,
-                    (what === 'RY' || what === 'GY' || what === 'YY') && styles.yellowCenter,
-                    (what === 'YR' || what === 'YG' || what === 'YY') && styles.yellowBorder
-                )}
-                onClick={this.execute}
-            >
-                {title}
+            <button className={classNames(styles.command, styles[what])} onClick={edit ? undefined : this.execute}>
+                {edit ? <input value={config[what] || ''} onChange={this.onChange} /> : title}
             </button>
         )
+    }
+
+    private readonly onChange = (ev: React.ChangeEvent<HTMLInputElement>): void => {
+        this.props.config[this.props.what] = ev.target.value || ''
+
+        this.forceUpdate()
     }
 
     private execute = async (): Promise<void> => {
@@ -58,38 +59,58 @@ export class Root extends React.PureComponent<IRootProps, IRootState> {
     constructor(props: Readonly<IRootState>) {
         super(props)
 
-        this.state = { ...this.state, busy: false, config: defaultConfiguration }
+        this.state = { ...this.state, busy: false, config: defaultConfiguration, edit: false }
     }
 
     render(): JSX.Element {
-        const { config } = this.state
+        const { config, edit } = this.state
 
         return (
             <div className={classNames(styles.root, this.state.busy && styles.busy)}>
-                <h1>Der Nico Alarm</h1>
+                <h1>
+                    <span>Der Nico Alarm</span>
+                    <img src={edit ? 'edit-solid.svg' : 'edit-regular.svg'} onClick={this.toggleEdit} />
+                    {edit && <img src={'save-solid.svg'} onClick={this.saveConfig} />}
+                </h1>
                 <div>
-                    <Command config={config} setBusy={this.setBusy} what='OFF' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='OFF' />
                 </div>
                 <div>
-                    <Command config={config} setBusy={this.setBusy} what='RR' />
-                    <Command config={config} setBusy={this.setBusy} what='RY' />
-                    <Command config={config} setBusy={this.setBusy} what='RG' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='RR' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='RY' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='RG' />
                 </div>
                 <div>
-                    <Command config={config} setBusy={this.setBusy} what='YR' />
-                    <Command config={config} setBusy={this.setBusy} what='YY' />
-                    <Command config={config} setBusy={this.setBusy} what='YG' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='YR' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='YY' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='YG' />
                 </div>
                 <div>
-                    <Command config={config} setBusy={this.setBusy} what='GR' />
-                    <Command config={config} setBusy={this.setBusy} what='GY' />
-                    <Command config={config} setBusy={this.setBusy} what='GG' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='GR' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='GY' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='GG' />
                 </div>
             </div>
         )
     }
 
     private readonly setBusy = (busy: boolean): void => this.setState({ busy })
+
+    private readonly toggleEdit = (): void => this.setState({ edit: !this.state.edit })
+
+    private readonly saveConfig = async (): Promise<void> => {
+        this.setState({ busy: true })
+
+        try {
+            await httpPut('/config.json', JSON.stringify(this.state.config))
+
+            this.setState({ edit: false })
+        } catch (error) {
+            alert(error.message || 'Konfiguration nicht gespeichert')
+        } finally {
+            this.setState({ busy: false })
+        }
+    }
 
     async componentDidMount(): Promise<void> {
         this.setState({ busy: true })

@@ -4,11 +4,36 @@
     display: grid;
     grid-template-rows: repeat(4, auto);
     row-gap: 1em;
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 2em);
     height: fit-content;
     height: -moz-fit-content;
     padding: 1em;
+    overflow: auto;
+
+    > h1 {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        align-items: center;
+        width: fit-content;
+        width: -moz-fit-content;
+
+        > img {
+            width: 1em;
+            height: 1em;
+
+            &:first-of-type {
+                margin-left: 1em;
+            }
+        }
+    }
+
+    > div {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        column-gap: 1em;
+        width: fit-content;
+        width: -moz-fit-content;
+    }
 
     &.busy {
         pointer-events: none;
@@ -18,53 +43,77 @@
 
 .command {
     $textShadow: 1px 1px #808080, 1px -1px #808080, -1px 1px #808080, -1px -1px #808080;
-
-    font-size: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
     font-weight: bold;
     color: #ffffff;
-
     background: #000000;
     border-width: 0;
     border-radius: 12px;
     outline: none;
 
-    + .command {
-        margin-left: 0.2em;
-    }
-
-    &.redBorder {
+    &.RR,
+    &.RG,
+    &.RY {
         background: #ff0000;
 
-        &.redCenter {
+        &.RR,
+        &.GR,
+        &.YR {
             text-shadow: $textShadow;
         }
     }
 
-    &.yellowBorder {
+    &.YR,
+    &.YG,
+    &.YY {
         background: #ffff00;
 
-        &.yellowCenter {
+        &.RY,
+        &.GY,
+        &.GY {
             text-shadow: $textShadow;
         }
     }
 
-    &.greenBorder {
+    &.GR,
+    &.GG,
+    &.GY {
         background: #00ff00;
 
-        &.greenCenter {
+        &.RG,
+        &.GG,
+        &.YG {
             text-shadow: $textShadow;
         }
     }
 
-    &.redCenter {
+    &.RR,
+    &.GR,
+    &.YR {
         color: #ff0000;
     }
 
-    &.yellowCenter {
+    &.RY,
+    &.GY,
+    &.YY {
         color: #ffff00;
     }
 
-    &.greenCenter {
+    &.RG,
+    &.GG,
+    &.YG {
         color: #00ff00;
+    }
+
+    &:not(.OFF) > input {
+        color: inherit;
+    }
+
+    > input {
+        margin: 0.1em;
+        font-size: 1em;
     }
 }

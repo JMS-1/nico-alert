@@ -55,6 +55,37 @@ export function httpGet<T>(uri: string, json = true): Promise<T> {
     })
 }
 
+export function httpPut(uri: string, data: string): Promise<string> {
+    return new Promise<string>((success, failure) => {
+        try {
+            const req = new XMLHttpRequest()
+
+            req.onload = () => {
+                try {
+                    if (req.status === 200) {
+                        success(req.responseText)
+                    } else {
+                        failure(req.statusText)
+                    }
+                } catch (error) {
+                    failure(error)
+                }
+            }
+
+            req.onerror = failure
+            req.ontimeout = failure
+
+            req.open('PUT', uri)
+
+            req.withCredentials = true
+
+            req.send(data)
+        } catch (error) {
+            failure(error)
+        }
+    })
+}
+
 export async function loadConfig(): Promise<IConfiguration> {
     const files = await httpGet<IFile[]>('/config')
 
