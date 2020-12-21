@@ -14,7 +14,7 @@
         "removeComments": true,
         "sourceMap": true,
         "strictPropertyInitialization": false,
-        "target": "ES2020"
+        "target": "ES2017"
     },
     "include": [
         "src/**/*.ts",
