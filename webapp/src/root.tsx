@@ -66,7 +66,7 @@ export class Root extends React.PureComponent<IRootProps, IRootState> {
         const { config, edit } = this.state
 
         return (
-            <div className={classNames(styles.root, this.state.busy && styles.busy)}>
+            <div className={classNames(styles.root, this.state.busy && styles.busy, edit && styles.edit)}>
                 <h1>
                     <span>Der Nico Alarm</span>
                     <img src={edit ? 'edit-solid.svg' : 'edit-regular.svg'} onClick={this.toggleEdit} />
