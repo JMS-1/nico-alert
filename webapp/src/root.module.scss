@@ -69,37 +69,37 @@
     &.RR,
     &.RG,
     &.RY {
-        background: #ff0000;
+        color: #ff0000;
     }
 
     &.YR,
     &.YG,
     &.YY {
-        background: #ffff00;
+        color: #ffff00;
     }
 
     &.GR,
     &.GG,
     &.GY {
-        background: #00ff00;
+        color: #00ff00;
     }
 
     &.RR,
     &.GR,
     &.YR {
-        color: #ff0000;
+        background: #ff0000;
     }
 
     &.RY,
     &.GY,
     &.YY {
-        color: #ffff00;
+        background: #ffff00;
     }
 
     &.RG,
     &.GG,
     &.YG {
-        color: #00ff00;
+        background: #00ff00;
     }
 
     &:not(.OFF) > input {

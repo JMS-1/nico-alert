@@ -77,17 +77,17 @@ export class Root extends React.PureComponent<IRootProps, IRootState> {
                 </div>
                 <div>
                     <Command config={config} edit={edit} setBusy={this.setBusy} what='RR' />
-                    <Command config={config} edit={edit} setBusy={this.setBusy} what='RY' />
-                    <Command config={config} edit={edit} setBusy={this.setBusy} what='RG' />
-                </div>
-                <div>
                     <Command config={config} edit={edit} setBusy={this.setBusy} what='YR' />
-                    <Command config={config} edit={edit} setBusy={this.setBusy} what='YY' />
-                    <Command config={config} edit={edit} setBusy={this.setBusy} what='YG' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='GR' />
                 </div>
                 <div>
-                    <Command config={config} edit={edit} setBusy={this.setBusy} what='GR' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='RY' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='YY' />
                     <Command config={config} edit={edit} setBusy={this.setBusy} what='GY' />
+                </div>
+                <div>
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='RG' />
+                    <Command config={config} edit={edit} setBusy={this.setBusy} what='YG' />
                     <Command config={config} edit={edit} setBusy={this.setBusy} what='GG' />
                 </div>
             </div>
