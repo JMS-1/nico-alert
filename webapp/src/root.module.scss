@@ -2,11 +2,10 @@
 
 .root {
     display: grid;
-    grid-template-rows: repeat(4, auto);
+    grid-template-rows: repeat(5, auto) 1fr;
     row-gap: 1em;
     width: calc(100% - 2em);
-    height: fit-content;
-    height: -moz-fit-content;
+    height: calc(100% - 2em);
     padding: 1em;
     overflow: auto;
 

@@ -90,6 +90,7 @@ export class Root extends React.PureComponent<IRootProps, IRootState> {
                     <Command config={config} edit={edit} setBusy={this.setBusy} what='YG' />
                     <Command config={config} edit={edit} setBusy={this.setBusy} what='GG' />
                 </div>
+                <div />
             </div>
         )
     }
