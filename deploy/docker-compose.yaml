@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 services:
   nico:
     image: nginx
@@ -9,8 +9,8 @@ services:
       - ./host.crt:/etc/ssl/certs/nginx/host.crt
       - ./host.key:/etc/ssl/certs/nginx/host.key
       - ./dist:/usr/webapp
-      - nico_alert:/usr/config
-    network_mode: host       
+      - nico_alert-oled:/usr/config
+    network_mode: host
 volumes:
-  nico_alert:
+  nico_alert-oled:
     external: true
