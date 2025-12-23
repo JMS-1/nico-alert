@@ -46,7 +46,10 @@ class Command extends React.PureComponent<ICommandProps> {
         this.props.setBusy(true)
 
         try {
-            await httpGet(`/iot/${this.props.what}`, false)
+            await httpGet(
+                `/iot/${this.props.what}?text=${encodeURIComponent(this.props.config[this.props.what])}`,
+                false
+            )
         } catch (error) {
             alert(error.message || 'Umschaltung nicht möglich')
         } finally {
