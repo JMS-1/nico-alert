@@ -31,7 +31,7 @@ export function httpGet<T>(uri: string, json = true): Promise<T> {
 
             req.onload = () => {
                 try {
-                    if (req.status === 200) {
+                    if (req.status === 200 || req.status === 204) {
                         success(json ? JSON.parse(req.responseText) : req.responseText)
                     } else {
                         failure(req.statusText)

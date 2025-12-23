@@ -1,1 +1,1 @@
-docker compose down && docker compose up -d
+docker compose -p oled down && docker compose -p oled up -d
