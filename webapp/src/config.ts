@@ -5,7 +5,7 @@ interface IFile {
     type: 'file'
 }
 
-export type TConfig = 'OFF' | 'RR' | 'RY' | 'RG' | 'YR' | 'YY' | 'YG' | 'GR' | 'GY' | 'GG'
+export type TConfig = 'OFF' | 'RR' | 'RY' | 'RG' | 'YR' | 'YY' | 'YG' | 'GR' | 'GY' | 'GG' | 'TEXT'
 
 export type IConfiguration = Record<TConfig, string>
 
@@ -18,6 +18,7 @@ export const defaultConfiguration: IConfiguration = {
     RG: '',
     RR: '',
     RY: '',
+    TEXT: '',
     YG: '',
     YR: '',
     YY: '',

@@ -15,7 +15,9 @@ interface IRootState {
 interface ICommandProps {
     config: IConfiguration
     edit: boolean
+    forceUpdate?(): void
     setBusy(busy: boolean): void
+    title?: string
     what: TConfig
 }
 
@@ -23,7 +25,7 @@ class Command extends React.PureComponent<ICommandProps> {
     render(): JSX.Element | null {
         const { config, what, edit } = this.props
 
-        const title = config[what]
+        const title = this.props.title || config[what]
 
         if (!title && !edit) {
             return null
@@ -40,6 +42,7 @@ class Command extends React.PureComponent<ICommandProps> {
         this.props.config[this.props.what] = ev.target.value || ''
 
         this.forceUpdate()
+        this.props.forceUpdate?.()
     }
 
     private execute = async (): Promise<void> => {
@@ -93,10 +96,28 @@ export class Root extends React.PureComponent<IRootProps, IRootState> {
                     <Command config={config} edit={edit} setBusy={this.setBusy} what='YG' />
                     <Command config={config} edit={edit} setBusy={this.setBusy} what='GG' />
                 </div>
+                <div>
+                    <Command
+                        config={config}
+                        edit={true}
+                        forceUpdate={this.onUpdate}
+                        setBusy={this.setBusy}
+                        what='TEXT'
+                    />
+                    <Command
+                        config={config}
+                        edit={false}
+                        setBusy={this.setBusy}
+                        title={config.TEXT && 'Absenden'}
+                        what='TEXT'
+                    />
+                </div>
                 <div />
             </div>
         )
     }
+
+    private readonly onUpdate = (): void => this.forceUpdate()
 
     private readonly setBusy = (busy: boolean): void => this.setState({ busy })
 
