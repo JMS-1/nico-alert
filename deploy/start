@@ -1,1 +1,1 @@
-docker compose -p oled down && docker compose -p oled up -d
+docker compose -p touch down && docker compose -p touch up -d
