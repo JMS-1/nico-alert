@@ -65,46 +65,6 @@
         text-shadow: $textShadow;
     }
 
-    &.RR,
-    &.RG,
-    &.RY {
-        color: #ff0000;
-    }
-
-    &.YR,
-    &.YG,
-    &.YY {
-        color: #ffff00;
-    }
-
-    &.GR,
-    &.GG,
-    &.GY {
-        color: #00ff00;
-    }
-
-    &.RR,
-    &.GR,
-    &.YR {
-        background: #ff0000;
-    }
-
-    &.RY,
-    &.GY,
-    &.YY {
-        background: #ffff00;
-    }
-
-    &.RG,
-    &.GG,
-    &.YG {
-        background: #00ff00;
-    }
-
-    &:not(.OFF):not(.TEXT) > input {
-        color: inherit;
-    }
-
     > input {
         margin: 0.1em;
         font-size: 1em;

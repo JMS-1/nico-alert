@@ -49,8 +49,21 @@ class Command extends React.PureComponent<ICommandProps> {
         this.props.setBusy(true)
 
         try {
+            const now = new Date()
+
+            const year = `${now.getFullYear()}`
+            const month = `${1 + now.getMonth()}`.padStart(2, '0')
+            const day = `${now.getDate()}`.padStart(2, '0')
+            const hour = `${now.getHours()}`.padStart(2, '0')
+            const minute = `${now.getMinutes()}`.padStart(2, '0')
+            const second = `${now.getSeconds()}`.padStart(2, '0')
+
+            const time = `${day}.${month}.${year} ${hour}:${minute}:${second}`
+
             await httpGet(
-                `/iot/${this.props.what}?text=${encodeURIComponent(this.props.config[this.props.what])}`,
+                `/iot/${this.props.what}?text=${encodeURIComponent(
+                    this.props.config[this.props.what]
+                )}&time=${encodeURIComponent(time)}`,
                 false
             )
         } catch (error) {

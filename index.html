@@ -1,139 +1,122 @@
 <html>
-
-<head>
+  <head>
     <title>Der Nico Alarm</title>
 
     <style>
-        body,
-        html {
-            width: 100%;
-            height: 100%;
-        }
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+      }
 
-        body {
-            margin: 0;
-            background: #eeeeee;
-            width: fit-content;
-            width: -moz-fit-content;
-        }
+      body {
+        margin: 0;
+        background: #eeeeee;
+        width: fit-content;
+        width: -moz-fit-content;
+      }
 
-        h1 {
-            text-align: center;
-            margin: 0.5em 0;
-        }
+      h1 {
+        text-align: center;
+        margin: 0.5em 0;
+      }
 
-        .options {
-            overflow: auto;
-            row-gap: 1em;
-            padding: 1em;
-        }
+      .options {
+        overflow: auto;
+        row-gap: 1em;
+        padding: 1em;
+      }
 
-        button {
-            font-size: 2em;
-            border-radius: 8px;
-            padding: 0.5em;
-            background: #cccccc;
-            border-width: 3px;
-            margin: 0.5em;
-            outline: unset !important;
-        }
-
-        button.center-red {
-            color: #ff0000;
-        }
-
-        button.center-green {
-            color: #00a000;
-        }
-
-        button.center-yellow {
-            color: #ffff00;
-        }
-
-        button.ring-red {
-            border-color: #ff0000;
-        }
-
-        button.ring-green {
-            border-color: #00a000;
-        }
-
-        button.ring-yellow {
-            border-color: #ffff00;
-        }
+      button {
+        font-size: 2em;
+        border-radius: 8px;
+        padding: 0.5em;
+        background: #cccccc;
+        border-width: 3px;
+        margin: 0.5em;
+        outline: unset !important;
+      }
     </style>
 
     <script>
-        function request(what) {
-            const xhr = new XMLHttpRequest()
+      function request(what) {
+        const xhr = new XMLHttpRequest();
 
-            xhr.open('GET', '/' + what)
+        xhr.open("GET", "/" + what);
 
-            xhr.send()
-        }
+        xhr.send();
+      }
 
-        function off() {
-            return request('OFF')
-        }
+      function off() {
+        return request("OFF");
+      }
 
-        function rr() {
-            return request('RR')
-        }
+      function rr() {
+        return request("RR");
+      }
 
-        function rg() {
-            return request('RG')
-        }
+      function rg() {
+        return request("RG");
+      }
 
-        function ry() {
-            return request('RY')
-        }
+      function ry() {
+        return request("RY");
+      }
 
-        function gr() {
-            return request('GR')
-        }
+      function gr() {
+        return request("GR");
+      }
 
-        function gg() {
-            return request('GG')
-        }
+      function gg() {
+        return request("GG");
+      }
 
-        function gy() {
-            return request('GY')
-        }
+      function gy() {
+        return request("GY");
+      }
 
+      function yr() {
+        return request("YR");
+      }
 
-        function yr() {
-            return request('YR')
-        }
+      function yg() {
+        return request("YG");
+      }
 
-        function yg() {
-            return request('YG')
-        }
-
-        function yy() {
-            return request('YY')
-        }
+      function yy() {
+        return request("YY");
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>Der Nico Alarm</h1>
-    <div class='options'>
-        <div>
-            <button onclick='off()'>Ausschalten</button>
-        </div>
-        <div>
-            <button onclick='rr()' class='center-red ring-red'>Leiser bitte</button>
-            <button onclick='gr()' class='center-green ring-red'>Essen ist fertig</button>
-        </div>
-        <div>
-            <button onclick='rg()' class='center-red ring-green'>Bitte melden</button>
-            <button onclick='yg()' class='center-yellow ring-green'>Besuch ist da</button>
-        </div>
-        <div>
-            <button onclick='ry()' class='center-red ring-yellow'>Gleich wird es laut</button>
-            <button onclick='gy()' class='center-green ring-yellow'>Anruf erwartet</button>
-        </div>
+    <div class="options">
+      <div>
+        <button onclick="off()">Ausschalten</button>
+      </div>
+      <div>
+        <button onclick="rr()" class="center-red ring-red">Leiser bitte</button>
+        <button onclick="gr()" class="center-green ring-red">
+          Essen ist fertig
+        </button>
+      </div>
+      <div>
+        <button onclick="rg()" class="center-red ring-green">
+          Bitte melden
+        </button>
+        <button onclick="yg()" class="center-yellow ring-green">
+          Besuch ist da
+        </button>
+      </div>
+      <div>
+        <button onclick="ry()" class="center-red ring-yellow">
+          Gleich wird es laut
+        </button>
+        <button onclick="gy()" class="center-green ring-yellow">
+          Anruf erwartet
+        </button>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
