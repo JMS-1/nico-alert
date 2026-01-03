@@ -177,7 +177,7 @@ export class Root extends React.PureComponent<IRootProps, IRootState> {
             this._timer = undefined
 
             try {
-                this.setState({ unconfirmed: await httpGet('/STATUS', false) })
+                this.setState({ unconfirmed: await httpGet('/iot/STATUS', false) })
             } catch (error) {
                 this.setState({ unconfirmed: '' })
             }
