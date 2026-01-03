@@ -10,6 +10,7 @@ interface IRootState {
     busy: boolean
     config: IConfiguration
     edit: boolean
+    unconfirmed: string
 }
 
 interface ICommandProps {
@@ -78,11 +79,15 @@ export class Root extends React.PureComponent<IRootProps, IRootState> {
     constructor(props: Readonly<IRootState>) {
         super(props)
 
-        this.state = { ...this.state, busy: false, config: defaultConfiguration, edit: false }
+        this.state = { ...this.state, busy: false, config: defaultConfiguration, edit: false, unconfirmed: '' }
     }
 
+    private _timer?: number
+
     render(): JSX.Element {
-        const { config, edit } = this.state
+        this.startStatus()
+
+        const { config, edit, unconfirmed } = this.state
 
         return (
             <div className={classNames(styles.root, this.state.busy && styles.busy, edit && styles.edit)}>
@@ -125,6 +130,9 @@ export class Root extends React.PureComponent<IRootProps, IRootState> {
                         what='TEXT'
                     />
                 </div>
+                <div className={classNames(styles.confirm, unconfirmed && styles.visible)}>
+                    Nicht bestätigt: {unconfirmed}
+                </div>
                 <div />
             </div>
         )
@@ -160,5 +168,25 @@ export class Root extends React.PureComponent<IRootProps, IRootState> {
         } finally {
             this.setState({ busy: false })
         }
+    }
+
+    private startStatus(): void {
+        if (this._timer !== undefined) return
+
+        this._timer = window.setTimeout(async () => {
+            this._timer = undefined
+
+            try {
+                this.setState({ unconfirmed: await httpGet('/STATUS', false) })
+            } catch (error) {
+                this.setState({ unconfirmed: '' })
+            }
+
+            this.startStatus()
+        }, 5000)
+    }
+
+    componentWillUnmount(): void {
+        if (this._timer !== undefined) window.clearTimeout(this._timer)
     }
 }
